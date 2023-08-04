@@ -18,7 +18,9 @@ class Diary(models.Model):
 class Page(models.Model):
     diary = models.ForeignKey(Diary, on_delete=models.PROTECT)
 
-    notes = models.TextField()
+    notes = models.TextField(null=True, blank=True)
+    what_I_learned = models.TextField(null=True, blank=True)
+    what_should_be_changed = models.TextField(null=True, blank=True)
 
     initial_tasks_number = models.PositiveIntegerField()
     total_tasks_number = models.PositiveIntegerField(null=True, blank=True)
@@ -32,3 +34,6 @@ class Page(models.Model):
     def done_percentage(self):
         if not self.total_tasks_number:
             return self.done_tasks_number / self.total_tasks_number
+
+    def __str__(self):
+        return f'{self.created_at}'

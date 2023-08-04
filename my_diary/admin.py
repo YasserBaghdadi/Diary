@@ -6,8 +6,16 @@ from .models import Diary, Page
 
 @admin.register(Diary)
 class DiaryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'user', 'created_at', 'modified_at', 'deleted_at')
+    list_display = (
+        'id',
+        'name',
+        'user',
+        'created_at',
+        'modified_at',
+        'deleted_at',
+    )
     list_filter = ('user', 'created_at', 'modified_at', 'deleted_at')
+    search_fields = ('name',)
     date_hierarchy = 'created_at'
 
 
@@ -17,6 +25,8 @@ class PageAdmin(admin.ModelAdmin):
         'id',
         'diary',
         'notes',
+        'what_I_learned',
+        'what_should_be_changed',
         'initial_tasks_number',
         'total_tasks_number',
         'done_tasks_number',
